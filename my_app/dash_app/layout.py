@@ -10,11 +10,17 @@ from my_app.dash_app.process_data import CrimeData
 
 # app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 pd.options.mode.chained_assignment = None
+try:
+    with open("data/london.geojson") as f:
+        london_geo = json.load(f)
+    Borough_data = pd.read_csv('data/Borough_dataset.csv')
+    crime_data = pd.read_csv('data/cleaned_dataset.csv')
+except FileNotFoundError:
+    with open("my_app/data/london.geojson") as f:
+        london_geo = json.load(f)
+    Borough_data = pd.read_csv('my_app/data/Borough_dataset.csv')
+    crime_data = pd.read_csv('my_app/data/cleaned_dataset.csv')
 
-with open("data/london.geojson") as f:
-    london_geo = json.load(f)
-crime_data = pd.read_csv('data/cleaned_dataset.csv')
-Borough_data = pd.read_csv('data/Borough_dataset.csv')
 
 data = CrimeData()
 area = 'Barking and Dagenham'

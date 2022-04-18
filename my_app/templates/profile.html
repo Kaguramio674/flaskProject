@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{% from "_formhelpers.html" import render_field %}
+{% block content %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_profile.css') }}">
+    <div class="profile">
+        <div class="profile_box">
+            <div class="profile_head head_l">
+                <h1>
+                    {{ user.username }}
+                    {% if user.email %}
+                        <small class="text-muted font-weight-light h5"> {{ user.email }}</small>
+                    {% endif %}
+                </h1>
+            </div>
+            <div class="profile_head head_m">
+                <h1>
+                    0<small class="text-muted font-weight-light h4"> Following&nbsp;&nbsp;&nbsp;&nbsp;</small>
+
+                    0<small class="text-muted font-weight-light h4"> Followers</small>
+                </h1>
+            </div>
+            <div class="profile_head head_r">
+                <a class="navbar-btn">
+                    <a href="{{ url_for('auth.login') }}" class="btn btn-lg btn-outline-secondary"><i class="fas fa-edit"></i>Edit Profile</a>
+                </a>
+            </div>
+            <p>This is the profile page.</p>
+            <p>Joined {{ moment(user.member_since).fromNow() }}</p>
+        </div>
+    </div>
+{% endblock %}

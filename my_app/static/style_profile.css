@@ -1,0 +1,31 @@
+body {
+    background-color:#c0d8d8;
+}
+
+.profile {
+    width: 100%;
+    background-color: #ffffff;
+    margin-top: 50px;
+}
+.profile_box {
+    margin: 0 50px;
+}
+.profile_head {
+  float: left;
+  padding: 10px;
+  height: 300px;
+}
+.head_l{width: 40%;}
+.head_m{width: 40%;}
+.head_r{width: 20%;}
+
+.profile_box:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+@media screen and (max-width: 800px) {
+  .head_l, .head_m, .head_r {
+    width: 100%;
+  }
+}

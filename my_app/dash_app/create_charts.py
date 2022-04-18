@@ -69,8 +69,12 @@ class Chart:
 
         borough_data = self.data.borough_data
         token = 'pk.eyJ1Ijoid3V5dWhlbmcwIiwiYSI6ImNremNtMDhnNzFlYXIzMG8xczJuOWlrYWcifQ.dAQLDBZjbtTWmnL1Q8nOog'
-        with open("data/london.geojson") as f:
-            london_geo = json.load(f)
+        try:
+            with open("data/london.geojson") as f:
+                london_geo = json.load(f)
+        except FileNotFoundError:
+            with open("my_app/data/london.geojson") as f:
+                london_geo = json.load(f)
         figure = px.choropleth_mapbox(
             data_frame=borough_data,
             geojson=london_geo,

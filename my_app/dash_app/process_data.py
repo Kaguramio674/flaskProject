@@ -24,9 +24,14 @@ class CrimeData:
                           '202104', '202105', '202106', '202107', '202108', '202109']
 
     def get_data(self):
-        self.borough_data = pd.read_csv('data/Borough_dataset.csv')
-        self.crime_data = pd.read_csv('data/cleaned_dataset.csv')
-        self.classified_data = pd.read_csv('data/Classified_dataset.csv')
+        try:
+            self.borough_data = pd.read_csv('data/Borough_dataset.csv')
+            self.crime_data = pd.read_csv('data/cleaned_dataset.csv')
+            self.classified_data = pd.read_csv('data/Classified_dataset.csv')
+        except FileNotFoundError:
+            self.borough_data = pd.read_csv('my_app/data/Borough_dataset.csv')
+            self.crime_data = pd.read_csv('my_app/data/cleaned_dataset.csv')
+            self.classified_data = pd.read_csv('my_app/data/Classified_dataset.csv')
         self.area_list = self.borough_data["Borough"].unique().tolist()
         self.major_class_list = self.crime_data["Major Class Description"].unique().tolist()
 

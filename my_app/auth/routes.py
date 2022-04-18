@@ -1,7 +1,7 @@
 from datetime import timedelta
 from sqlite3 import IntegrityError
 from urllib.parse import urlparse, urljoin
-
+from datetime import datetime
 from flask_login import login_user, login_required, logout_user
 
 from my_app import login_manager
@@ -18,7 +18,7 @@ auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 def signup():
     signup_form = SignupForm(request.form)
     if signup_form.validate_on_submit():
-        user = User(username=signup_form.username.data, email=signup_form.email.data)
+        user = User(username=signup_form.username.data, email=signup_form.email.data, member_since=datetime.utcnow())
         user.set_password(signup_form.password.data)
         db.session.add(user)
         db.session.commit()

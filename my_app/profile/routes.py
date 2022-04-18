@@ -1,8 +1,13 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, abort
 
-profile_bp = Blueprint('profile', __name__)
+from my_app.models import User
+
+profile_bp = Blueprint('profile', __name__, url_prefix='/user')
 
 
-@profile_bp.route('/profile')
-def forum():
-    return render_template('index.html', title="Profile")
+@profile_bp.route('/<username>')
+def profile(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        abort(404)
+    return render_template('profile.html', title="Profile", user=user)

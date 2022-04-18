@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask.helpers import get_root_path
 from flask_login import LoginManager, login_required
+from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
 import dash
@@ -10,10 +11,11 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 csrf = CSRFProtect()
 csrf._exempt_views.add('dash.dash.dispatch')
-
+moment = Moment()
 
 def create_app(config_classname):
     app = Flask(__name__)
+    moment.init_app(app)
     app.config.from_object(config_classname)
     db.init_app(app)
     register_dashapp(app)
@@ -34,8 +36,8 @@ def create_app(config_classname):
     from my_app.auth.routes import auth_bp
     app.register_blueprint(auth_bp)
 
-    from my_app.profile.routes import forum_bp
-    app.register_blueprint(forum_bp)
+    from my_app.profile.routes import profile_bp
+    app.register_blueprint(profile_bp)
 
     @app.errorhandler(404)
     def not_found(e):
