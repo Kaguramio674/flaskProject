@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+{% from "_formhelpers.html" import render_field %}
+{% block content %}
+
+    <div class="form-wrapper">
+        <h2 class="title">London Business Crime Dash Board</h2>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+        <form method="POST" action="{{ url_for('auth.signup') }}">
+            <div class="login">
+                <div class="links">
+                    <a href="{{ url_for('auth.login') }}">login</a>
+                    <a href="{{ url_for('auth.signup') }}" class="active">signup</a>
+                </div>
+                <div class="signform">
+                    <form method="POST" action="{{ url_for('auth.signup') }}">
+                        {{ form.csrf_token }}
+                        <dl>
+                            {{ render_field(form.username, class="form-control",placeholder="Username") }}
+                            <li>Username must be between 6-15 characters.</li>
+                            {{ render_field(form.email, class="form-control",placeholder="Email address") }}
+                            {{ render_field(form.password, class="form-control",placeholder="Password") }}
+                            Passwords must:
+                            <li>at least 8 characters.</li>
+                            <li>at least one UPPERCASE letter, one lowercase letter.</li>
+                            <li>at least one numeric character and one special character: @!%*?&.</li>
+                            {{ render_field(form.password_repeat, class="form-control",placeholder="Repeat Your Password") }}
+                        </dl>
+                        <p class="submit_btn">
+                            <button type="submit" class="btn btn-primary" id="sign_up_btn">Sign up</button>
+                        </p>
+                        <br>
+                    </form>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+{% endblock %}

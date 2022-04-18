@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Business Crime</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ url_for("main.index") }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard/">Dash</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/forum">Forum</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Auth</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="form-inline my-2 my-lg-0">
+            {% if current_user.is_anonymous %}
+                <a class="navbar-btn">
+                    <a href="{{ url_for('auth.login') }}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-user"></i>Log in</a>
+                </a>
+                <span>|</span>
+                <a class="navbar-btn">
+                    <a href="{{ url_for('auth.signup') }}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-user-plus"></i>Sign
+                        up</a>
+                </a>
+            {% else %}
+                 <a class="navbar-btn">
+                 <a href="{{ url_for('auth.logout') }}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
