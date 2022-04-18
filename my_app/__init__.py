@@ -34,7 +34,7 @@ def create_app(config_classname):
     from my_app.auth.routes import auth_bp
     app.register_blueprint(auth_bp)
 
-    from my_app.forum.routes import forum_bp
+    from my_app.profile.routes import forum_bp
     app.register_blueprint(forum_bp)
 
     @app.errorhandler(404)
