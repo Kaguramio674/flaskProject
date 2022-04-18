@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template
 
-forum_bp = Blueprint('forum', __name__)
+profile_bp = Blueprint('profile', __name__)
 
 
-@forum_bp.route('/forum')
+@profile_bp.route('/profile')
 def forum():
-    return render_template('index.html', title="Forum")
+    return render_template('index.html', title="Profile")
