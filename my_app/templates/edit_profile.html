@@ -15,7 +15,7 @@
                     <i class="fas fa-robot"></i>
                 {% endif %}
                 <br>
-                {% if user.profile.first_name != NULL and user.profile.last_name != NULL %}
+                {% if user.profile.first_name != None and user.profile.last_name != None %}
                     <small class="text-muted font-weight-light h5"> {{ user.profile.first_name }} {{ user.profile.last_name }}</small>
                 {% endif %}
             </h1>

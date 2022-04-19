@@ -1,0 +1,27 @@
+.h1title{
+    margin-top: 30px;
+    text-align: center;
+    font-size: 40px;
+}
+.mainpage_1 {
+    margin-top: 20px;
+    background-color: #ffffff;
+}
+body {
+    background-color:#c0d8d8;
+}
+p{
+    font-size: 23px;
+}
+.user_list{
+    float: left;
+    margin-top: 5px;
+    background-color: #ffffff;
+    font-size: 23px;
+    height: 130px;
+    width: 100%;
+
+}
+.user_list_i{
+    white-space:nowrap;
+}

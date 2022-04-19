@@ -15,7 +15,7 @@
                     <i class="fas fa-robot"></i>
                 {% endif %}
                 <br>
-                {% if user.profile.first_name != NULL and user.profile.last_name != NULL %}
+                {% if user.profile.first_name != None and user.profile.last_name != None %}
                     <small class="text-muted font-weight-light h5"> {{ user.profile.first_name }} {{ user.profile.last_name }}</small>
                 {% endif %}
             </h1>
@@ -40,8 +40,9 @@
 
                 <form method=POST enctype=multipart/form-data action="{{ url_for('profile.edit_photo') }}">
                     {{ form.csrf_token }}
-                    <input type=file name=photo>
-                    <button type="submit">Submit</button>
+                    Change photo:<br><br>
+                    <input type=file name=photo><br><br>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>

@@ -28,7 +28,7 @@ def create_app(config_classname):
     csrf.init_app(app)
 
     with app.app_context():
-        from my_app.models import User, Profile, Friends
+        from my_app.models import User, Profile
         db.create_all()
 
     from my_app.main.routes import main_bp
@@ -40,9 +40,16 @@ def create_app(config_classname):
     from my_app.profile.routes import profile_bp
     app.register_blueprint(profile_bp)
 
+    from my_app.list.routes import user_list_bp
+    app.register_blueprint(user_list_bp)
+
     @app.errorhandler(404)
     def not_found(e):
         return render_template('404.html'), 404
+
+    @app.errorhandler(500)
+    def not_found(e):
+        return render_template('500.html'), 500
 
     return app
 

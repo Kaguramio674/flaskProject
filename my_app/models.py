@@ -36,16 +36,9 @@ class Profile(db.Model):
     gender = db.Column(db.Text, nullable=True)
     photo = db.Column(db.Text, nullable=True)
     user = db.relationship("User", back_populates="profile")
-    # friends = db.relationship("Friends", backref=db.backref('user'))
+
 
     def __repr__(self):
         return f"{self.id} {self.user_id} {self.username} {self.first_name} {self.last_name} {self.gender} {self.photo}"
 
 
-class Friends(db.Model):
-    __tablename__ = "friends"
-    user_id = db.Column(db.Integer, primary_key=True)
-    follower_id = db.Column(db.Integer, nullable=False)
-
-    def __repr__(self):
-        return f"{self.user_id} {self.follower_id}"

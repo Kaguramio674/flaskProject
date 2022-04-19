@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, flash
-from flask_login import current_user
+from flask import Blueprint, render_template
+
+from my_app.models import User
 
 main_bp = Blueprint('main', __name__)
 

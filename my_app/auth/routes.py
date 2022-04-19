@@ -22,7 +22,7 @@ def signup():
         user.set_password(signup_form.password.data)
         db.session.add(user)
         db.session.commit()
-        profile = Profile(user_id=user.id, username=user.username)
+        profile = Profile(user_id=user.id, username=user.username, photo="/static/img/default-user.jpg")
         db.session.add(profile)
         db.session.commit()
         try:

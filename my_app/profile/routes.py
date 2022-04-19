@@ -1,3 +1,5 @@
+import random
+import os
 from flask import Blueprint, render_template, abort, request, session, flash, redirect, url_for
 from flask_login import current_user, login_required
 
@@ -14,7 +16,7 @@ def profile(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
         abort(404)
-    return render_template('profile.html', title="Profile", user=user)
+    return render_template('profile.html', title="Profile", user=user, photo=user.profile.photo)
 
 
 @profile_bp.route('/edit_basic', methods=['GET', 'POST'])
@@ -48,9 +50,17 @@ def edit_password():
 @login_required
 def edit_photo():
     photo_form = PhotoForm(request.form)
+    user = User.query.filter_by(username=current_user.username).first()
     if request.method == 'POST' and 'photo' in request.files:
+        while True:
+            request.files['photo'].filename = str(random.randint(1000000, 9999999)) + "." + request.files['photo'].filename.split('.')[1]
+            if os.path.exists(request.files['photo'].filename):
+                continue
+            else:
+                break
         photos.save(request.files['photo'])
+        user.profile.photo = "/static/img/"+request.files['photo'].filename
+        db.session.commit()
         flash("Photo saved successfully.")
-        return render_template('profile.html')
     return render_template('edit_photo.html', title="Edit_Profile",user=current_user,form=photo_form)
 

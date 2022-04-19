@@ -6,11 +6,19 @@
     <div class="profile">
         <div class="profile_box">
             <div class="profile_head head_photo">
-
+                <img src={{ user.profile.photo }} width="80%" height="80%">
             </div>
             <div class="profile_head head_l">
                 <h1>
-                    {{ user.username }}<br>
+                    {{ user.username }}
+                    {% if user.profile.gender == "Male" %}
+                        <i class="fas fa-mars"></i>
+                    {% elif user.profile.gender == "Female" %}
+                        <i class="fas fa-venus"></i>
+                    {% elif user.profile.gender == "Robot" %}
+                        <i class="fas fa-robot"></i>
+                    {% endif %}
+                    <br>
                     {% if user.email %}
                         <small class="text-muted font-weight-light h5"> {{ user.email }}</small>
                     {% endif %}

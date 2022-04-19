@@ -1,8 +1,25 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-    <h1>{{ title }}</h1>
-    <p>This is the home page.</p>
+    <h1 class="h1title">London Business Crime Flask App</h1>
+    <div class="mainpage_1">
+        <h3>
+            Why research on business crime?
+        </h3>
+        <p>
+            &nbsp;&nbsp;&nbsp;&nbsp;Business crime may lead to disastrous consequences, like significant financial
+            losses and damages to related
+            people. In recent years, the business crime rate has been a difficult problem for police officers. On
+            average, there are 31.5 times of business crime happening every hour in London, how to deploy the police
+            force effectively and rapidly becomes a large problem to police stations.<br>
 
+            &nbsp;&nbsp;&nbsp;&nbsp;Research on data of business in London will help officers know crime classification
+            and distribution by area
+            and number of a different kind of crime by month, which not only can highly improve the handling ability and
+            efficiency to the business crime of police stations but also can lower down the crime rate.
+        </p>
+
+    </div>
+    <img src="/static/img/main.png" width="100%" height="100%">
 {% endblock %}
