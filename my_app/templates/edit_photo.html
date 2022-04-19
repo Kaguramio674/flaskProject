@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+{% from "_formhelpers.html" import render_field %}
+{% block content %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_edit.css') }}">
+    <div class="profile">
+        <div class="profile_box">
+            <h1 class="edit">
+                {{ user.username }}
+                {% if user.profile.gender == "Male" %}
+                    <i class="fas fa-mars"></i>
+                {% elif user.profile.gender == "Female" %}
+                    <i class="fas fa-venus"></i>
+                {% elif user.profile.gender == "Robot" %}
+                    <i class="fas fa-robot"></i>
+                {% endif %}
+                <br>
+                {% if user.profile.first_name != NULL and user.profile.last_name != NULL %}
+                    <small class="text-muted font-weight-light h5"> {{ user.profile.first_name }} {{ user.profile.last_name }}</small>
+                {% endif %}
+            </h1>
+            <div class="split"></div>
+        </div>
+        <div class="edit_content">
+            <ul class="edit_box">
+                <li class="edit_menu"><a href="/user/edit_basic">Basic Information</a></li>
+                <li class="edit_menu"><a class="active" href="/user/photo">Photo</a></li>
+                <li class="edit_menu"><a href="/user/password">Password</a></li>
+            </ul>
+            <div class="edit_form">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul class=flashes>
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+
+                <form method=POST enctype=multipart/form-data action="{{ url_for('profile.edit_photo') }}">
+                    {{ form.csrf_token }}
+                    <input type=file name=photo>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

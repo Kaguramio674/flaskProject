@@ -6,29 +6,28 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
 import dash
 import dash_bootstrap_components as dbc
-
-
+from flask_uploads import UploadSet, IMAGES, configure_uploads
 
 db = SQLAlchemy()
 login_manager = LoginManager()
 csrf = CSRFProtect()
 csrf._exempt_views.add('dash.dash.dispatch')
 moment = Moment()
+photos = UploadSet('photos', IMAGES)
 
 def create_app(config_classname):
     app = Flask(__name__)
-    moment.init_app(app)
+
     app.config.from_object(config_classname)
     db.init_app(app)
+    configure_uploads(app, photos)
+    moment.init_app(app)
     register_dashapp(app)
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
     csrf.init_app(app)
 
     with app.app_context():
-        # from my_app.dash_app.layout import init_dashboard
-        # app = init_dashboard(app)
-
         from my_app.models import User, Profile, Friends
         db.create_all()
 

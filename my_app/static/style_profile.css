@@ -15,10 +15,10 @@ body {
   float: left;
   padding-top: 10px;
 }
-
+.head_photo{width: 15%;}
 .head_l{width: 40%;}
-.head_m{width: 40%;}
-.head_r{width: 20%;}
+.head_m{width: 30%;}
+.head_r{width: 15%;}
 
 .profile_box:after {
   content: "";

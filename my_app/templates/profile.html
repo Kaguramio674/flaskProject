@@ -5,6 +5,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style_profile.css') }}">
     <div class="profile">
         <div class="profile_box">
+            <div class="profile_head head_photo">
+
+            </div>
             <div class="profile_head head_l">
                 <h1>
                     {{ user.username }}<br>
@@ -23,7 +26,8 @@
             <div class="profile_head head_r">
                 {% if current_user.username == user.username %}
                     <a class="navbar-btn">
-                        <a href="{{ url_for('profile.edit_basic_profile') }}" class="btn btn-lg btn-outline-secondary"><i
+                        <a href="{{ url_for('profile.edit_basic_profile') }}"
+                           class="btn btn-lg btn-outline-secondary"><i
                                 class="fas fa-edit"></i>Edit Profile</a>
                     </a>
                 {% else %}
@@ -34,7 +38,8 @@
                 {% endif %}
             </div>
         </div>
-        <br><p>This is the profile page.</p>
+        <br>
+        <p>This is the profile page.</p>
         <p>Joined {{ moment(user.member_since).fromNow() }}</p>
     </div>
 

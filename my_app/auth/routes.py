@@ -26,7 +26,7 @@ def signup():
         db.session.add(profile)
         db.session.commit()
         try:
-            flash(f"Hello, {user.username},  {user.email} You are signed up.")
+            flash(f"Hello, {user.username},  {user.email} You are signed up.",'success')
         except IntegrityError:
             db.session.rollback()
             flash(f'Error, unable to register {signup_form.email.data}. ', 'error')
@@ -73,7 +73,7 @@ def get_safe_redirect():
 
 @login_manager.unauthorized_handler
 def unauthorized():
-    flash('You must be logged in to view that page.')
+    flash('You must be logged in to view that page.', 'warning')
     return redirect(url_for('auth.login'))
 
 
