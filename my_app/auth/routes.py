@@ -9,7 +9,7 @@ from flask import Blueprint, render_template, flash, redirect, url_for, request,
 
 from my_app import db
 from my_app.auth.forms import SignupForm, LoginForm
-from my_app.models import User
+from my_app.models import User, Profile
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -21,6 +21,9 @@ def signup():
         user = User(username=signup_form.username.data, email=signup_form.email.data, member_since=datetime.utcnow())
         user.set_password(signup_form.password.data)
         db.session.add(user)
+        db.session.commit()
+        profile = Profile(user_id=user.id, username=user.username)
+        db.session.add(profile)
         db.session.commit()
         try:
             flash(f"Hello, {user.username},  {user.email} You are signed up.")
@@ -47,7 +50,6 @@ def login():
 
 @login_manager.user_loader
 def load_user(user_id):
-    """ Takes a user ID and returns a user object or None if the user does not exist"""
     if user_id is not None:
         return User.query.get(user_id)
     return None
@@ -71,7 +73,6 @@ def get_safe_redirect():
 
 @login_manager.unauthorized_handler
 def unauthorized():
-    """Redirect unauthorized users to Login page."""
     flash('You must be logged in to view that page.')
     return redirect(url_for('auth.login'))
 

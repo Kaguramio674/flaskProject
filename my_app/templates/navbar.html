@@ -14,7 +14,7 @@
                     <a class="nav-link" href="/dashboard/">Dash</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile">My Profile</a>
+                    <a class="nav-link" href="/user/{{ current_user.username }}">My Profile</a>
                 </li>
             </ul>
         </div>
@@ -30,6 +30,7 @@
                         up</a>
                 </a>
             {% else %}
+                <a>Hi, {{ current_user.username }}&nbsp;&nbsp;&nbsp;&nbsp;</a>
                  <a class="navbar-btn">
                  <a href="{{ url_for('auth.logout') }}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </a>

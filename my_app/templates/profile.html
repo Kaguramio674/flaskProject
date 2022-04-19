@@ -7,7 +7,7 @@
         <div class="profile_box">
             <div class="profile_head head_l">
                 <h1>
-                    {{ user.username }}
+                    {{ user.username }}<br>
                     {% if user.email %}
                         <small class="text-muted font-weight-light h5"> {{ user.email }}</small>
                     {% endif %}
@@ -15,18 +15,28 @@
             </div>
             <div class="profile_head head_m">
                 <h1>
-                    0<small class="text-muted font-weight-light h4"> Following&nbsp;&nbsp;&nbsp;&nbsp;</small>
+                    0<small class="text-muted font-weight-light h4"> Following&nbsp;&nbsp;&nbsp;&nbsp;</small><br>
 
                     0<small class="text-muted font-weight-light h4"> Followers</small>
                 </h1>
             </div>
             <div class="profile_head head_r">
-                <a class="navbar-btn">
-                    <a href="{{ url_for('auth.login') }}" class="btn btn-lg btn-outline-secondary"><i class="fas fa-edit"></i>Edit Profile</a>
-                </a>
+                {% if current_user.username == user.username %}
+                    <a class="navbar-btn">
+                        <a href="{{ url_for('profile.edit_basic_profile') }}" class="btn btn-lg btn-outline-secondary"><i
+                                class="fas fa-edit"></i>Edit Profile</a>
+                    </a>
+                {% else %}
+                    <a class="navbar-btn">
+                        <a href="{{ url_for('auth.login') }}" class="btn btn-lg btn-outline-secondary"><i
+                                class="fas fa-plus"></i> follow</a>
+                    </a>
+                {% endif %}
             </div>
-            <p>This is the profile page.</p>
-            <p>Joined {{ moment(user.member_since).fromNow() }}</p>
         </div>
+        <br><p>This is the profile page.</p>
+        <p>Joined {{ moment(user.member_since).fromNow() }}</p>
     </div>
+
+
 {% endblock %}

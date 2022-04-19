@@ -7,6 +7,8 @@ from flask_wtf import CSRFProtect
 import dash
 import dash_bootstrap_components as dbc
 
+
+
 db = SQLAlchemy()
 login_manager = LoginManager()
 csrf = CSRFProtect()
@@ -27,7 +29,7 @@ def create_app(config_classname):
         # from my_app.dash_app.layout import init_dashboard
         # app = init_dashboard(app)
 
-        from my_app.models import User
+        from my_app.models import User, Profile, Friends
         db.create_all()
 
     from my_app.main.routes import main_bp
@@ -47,7 +49,6 @@ def create_app(config_classname):
 
 
 def register_dashapp(app):
-    """ Registers the Dash app in the Flask app and make it accessible on the route /dashboard/ """
     from my_app.dash_app import layout
     from my_app.dash_app.callbacks import register_callbacks
 
@@ -65,12 +66,10 @@ def register_dashapp(app):
         dashapp.layout = layout.layout
         register_callbacks(dashapp)
 
-    # Protects the views with Flask-Login
     _protect_dash_views(dashapp)
 
 
 def _protect_dash_views(dash_app):
-    """ Protects Dash views with Flask-Login"""
     for view_func in dash_app.server.view_functions:
         if view_func.startswith(dash_app.config.routes_pathname_prefix):
             dash_app.server.view_functions[view_func] = login_required(dash_app.server.view_functions[view_func])
